@@ -9,9 +9,9 @@ const bookLoanCheck = async (req, res, next) => {
 	};
 	try {
 		const { isbn, libraryId } = req.query;
-		if (libraryId === '35') {
+		if (libraryId === '35' || libraryId === 35) {
 			const result35 = await axios(
-				`http://210.90.123.213:9070/kdotapi/ksearchapi/booksearch?pageno=1&display=10&search_type=detail&manage_code=MJ&search_isbn_issn=${isbn}`,
+				`${process.env.THIRTY_FIVE}/booksearch?pageno=1&display=10&search_type=detail&manage_code=MJ&search_isbn_issn=${isbn}`,
 			); // 신대도서관 접속
 			const result35Data = result35.data;
 			if (result35Data.RESULT_INFO !== 'SUCCESS' || result35Data.LIST_DATA[0].SEARCH_COUNT === 0) {
