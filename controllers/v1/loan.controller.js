@@ -13,7 +13,6 @@ const bookLoanCheck = async (req, res, next) => {
 			const result35 = await axios(
 				`${process.env.THIRTY_FIVE}/booksearch?pageno=1&display=10&search_type=detail&manage_code=MJ&search_isbn_issn=${isbn}`,
 			); // 신대도서관 접속
-			console.log('result35 :', result35);
 			const result35Data = result35.data;
 			if (result35Data.RESULT_INFO !== 'SUCCESS' || result35Data.LIST_DATA[0].SEARCH_COUNT === 0) {
 				return res.json(loanResult); // 서버 접속이 원활하지 않거나 , 책이 없을 경우
@@ -34,9 +33,7 @@ const bookLoanCheck = async (req, res, next) => {
 						// 대출 불가한 경우
 					}
 				}
-				return res.json({
-					loanResult,
-				});
+				return res.json(loanResult);
 			}
 		}
 		// if (result35Data.RESULT_INFO !== 'SUCCESS' || result35Data.LIST_DATA[0].SEARCH_COUNT === 0) {
